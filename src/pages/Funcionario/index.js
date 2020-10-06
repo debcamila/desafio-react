@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
+import TopBarComponent from '../../components/TopBarComponent';
 
-export default function Funcionario() {
+export default withRouter(function Funcionario(props) {
 
     const [nome, setNome] = useState('');
     const [sobrenome, setSobrenome] = useState('');
@@ -14,12 +16,16 @@ export default function Funcionario() {
 
     return (
         <div>
-            <h1>agora  vai</h1>
-            <TextField id="nome" label="nome" 
-            onChange={(event)=>{
-                setNome(event.target.value)
-            }}/>
-            <button onClick={()=>{mandar()}}>hi</button>
+            <TopBarComponent />
+
+            <div class="container">
+                <h1>agora  vai</h1>
+                <TextField id="nome" label="nome" 
+                onChange={(event)=>{
+                    setNome(event.target.value)
+                }}/>
+                <button onClick={()=>{mandar()}}>hi</button>
+            </div>
         </div>
     )
-}
+})
