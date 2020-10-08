@@ -19,22 +19,38 @@ export default withRouter(function HomePage(props) {
                     <Grid item xs={8} sm={5} className="grid-item">
                         <Typography variant="h4">Cadastrar Funcionário</Typography>
                         <Typography>Cadastre aqui um novo Funcionário.</Typography>
+
                         <Button variant="contained" color="primary" 
                             onClick={() =>{
                                 props.history.push("/funcionario")
                             }}>
                                 Novo Funcionário
                         </Button>
+
+                        <Button variant="outlined" color="primary" style={{marginLeft: "15px"}}
+                            onClick={() =>{
+                                props.history.push("/listar-funcionarios")
+                            }}>
+                                Listar Funcionários
+                        </Button>
                     </Grid>
 
                     <Grid item xs={8} sm={5} className="grid-item" >
                         <Typography variant="h4">Cadastrar Cargo</Typography>
                         <Typography>Cadastre aqui um novo Cargo.</Typography>
+
                         <Button variant="contained" color="primary" 
                             onClick={() =>{
                                 props.history.push("/cargo")
                             }}>
                                 Novo Cargo
+                        </Button>
+
+                        <Button variant="outlined" color="primary" style={{marginLeft: "15px"}}
+                            onClick={() =>{
+                                props.history.push("/listar-cargos")
+                            }}>
+                                Listar Cargos
                         </Button>
                     </Grid>
 
