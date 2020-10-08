@@ -8,8 +8,19 @@ export default function REDUCER_FUNCIONARIO (state={funcionarios:[]}, action){
             return {...state, funcionarios: [...state.funcionarios, action.novoFuncionario]}
 
         case 'DELETE_FUNCIONARIO':
-            let funcionarioDeletado = [...state.funcionarios].filter(funcionario => funcionario.nome !== action.nomeExcluido);
+            let funcionarioDeletado = [...state.funcionarios].filter(funcionario => (funcionario.nome !== action.nomeExcluido || funcionario.sobrenome !== action.sobrenomeExcluido));
             return {...state, funcionarios: [...funcionarioDeletado]}
+
+        case 'EDIT_FUNCIONARIO':
+            let funcionarioEditado = [...state.funcionarios].map(funcionario => {
+                if(action.funcionarioAtualizado.nome === funcionario.nome && action.funcionarioAtualizado.sobrenome === funcionario.sobrenome){
+                    return action.funcionarioAtualizado;
+                }else{
+                    return funcionario;
+                }
+            })
+            return {...state, funcionarios: [...funcionarioEditado]}
+
         default:
             return state;
     }

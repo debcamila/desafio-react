@@ -51,15 +51,15 @@ export default withRouter(function ListaCargos(props) {
                         </div>
                     </Grid>
 
-                    <Grid xs={12} sm={12} className="btn-form">
-                        <Button variant="outlined" color="primary" style={{marginRight:"15px"}}
+                    <Grid xs={12} sm={12} className="btn-form" style={{marginTop:"35px"}}>
+                        <Button variant="outlined" color="primary" style={{marginLeft: "15px", float: "right"}}
                             onClick={() => {
                                 props.history.push("/")
                             }}>
                             Voltar
                         </Button>
 
-                        <Button variant="contained" color="primary"
+                        <Button variant="contained" color="primary" style={{float: "right"}}
                             onClick={() => {
                                 props.history.push("/cargo")
                             }}>
