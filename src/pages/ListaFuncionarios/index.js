@@ -110,7 +110,7 @@ export default withRouter(function ListaFuncionarios(props) {
                                         let novoFuncionario = {
                                             ...userEditando, 
                                             cargo: novoCargo === '' ? userEditando.cargo : novoCargo,
-                                            salario: novoSalario == 0 ? userEditando.salario : novoSalario 
+                                            salario: novoSalario === 0 ? userEditando.salario : novoSalario 
                                         }
                                         editar_funcionario(novoFuncionario);
                                     }}

@@ -6,12 +6,18 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import "./style.css";
 import { useDispatch, useSelector } from 'react-redux'; 
 //dispatch - permite chamar uma acao q modifica o state
 //selector - ler do state
 
 import TopBarComponent from '../../components/TopBarComponent';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default withRouter(function Funcionario(props) {
 
@@ -20,6 +26,8 @@ export default withRouter(function Funcionario(props) {
     const [cargo, setCargo] = useState('');
     const [dataNascimento, setDataNascimento] = useState(null);
     const [salario, setSalario] = useState(null);
+
+    const [openMessage, setOpenMessage] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -34,6 +42,10 @@ export default withRouter(function Funcionario(props) {
             salario: salario
         }
         dispatch({type:'ADD_FUNCIONARIO', novoFuncionario: novoFuncionario});
+    }
+
+    function handleClose(){
+        setOpenMessage(false);
     }
 
     return (
@@ -123,6 +135,12 @@ export default withRouter(function Funcionario(props) {
                             <Button variant="contained" color="primary" style={{marginRight:"15px"}}
                                 onClick={() => {
                                     adicionar_funcionario();
+                                    setOpenMessage(true);
+                                    setNome('');
+                                    setSobrenome('');
+                                    setCargo('');
+                                    setDataNascimento('');
+                                    setSalario('');
                                 }}>
                                 Enviar
                             </Button>
@@ -131,6 +149,13 @@ export default withRouter(function Funcionario(props) {
 
                     </Grid>
                 </Grid>
+
+                <Snackbar open={openMessage} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        Funcionário cadastrado com sucesso!
+                    </Alert>
+                </Snackbar>
+
             </div>
         </div>
     )

@@ -5,7 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TopBarComponent from '../../components/TopBarComponent';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { useDispatch } from 'react-redux'; //permite chamar uma acao
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 export default withRouter(function Cargo(props) {
@@ -13,6 +19,7 @@ export default withRouter(function Cargo(props) {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const dispatch = useDispatch();
+    const [openMessage, setOpenMessage] = useState(false);
 
     function adionar_cargo(){
         let novoCargo = {
@@ -20,6 +27,10 @@ export default withRouter(function Cargo(props) {
             descricao: descricao
         }
         dispatch({type:'ADD_CARGO', novoCargo: novoCargo});
+    }
+
+    function handleClose(){
+        setOpenMessage(false);
     }
 
     return (
@@ -62,7 +73,10 @@ export default withRouter(function Cargo(props) {
 
                             <Button variant="contained" color="primary"
                                 onClick={() => {
-                                    adionar_cargo()
+                                    adionar_cargo();
+                                    setOpenMessage(true);
+                                    setNome('');
+                                    setDescricao('');
                                 }}>
                                 Enviar
                             </Button>
@@ -70,6 +84,13 @@ export default withRouter(function Cargo(props) {
                         </Grid>
                     </Grid>
                 </Grid>
+
+                <Snackbar open={openMessage} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        Cargo cadastrado com sucesso!
+                    </Alert>
+                </Snackbar>
+
             </div>
         </div>
     )
